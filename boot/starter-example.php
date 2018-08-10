@@ -20,8 +20,8 @@ class MainApplication extends Application
 		
 		if ( Config::ENV == 'development' )
 		{
-			define("MYSQL_LOG_FILE", "./log/mysql.log");
-			define("MATRIX_QUERY_DEBUG", 1);
+			define( "MYSQL_LOG_FILE", "./log/mysql.log" );
+			define( "MATRIX_QUERY_DEBUG", 1 );
 			
 			if( !file_exists( 'users/'.$this->uri['controller'].'/config.php' ) )
 			{
