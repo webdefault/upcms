@@ -35,15 +35,18 @@ class Options
 		
 		self::$opt = array();
 		$lastclass = '';
-		foreach( $result AS $item )
+		if( $result )
 		{
-			if( $item['class'] != $lastclass )
+			foreach( $result AS $item )
 			{
-				self::$opt[$item['class']] = array();
-				$lastclass = $item['class'];
-			}
+				if( $item['class'] != $lastclass )
+				{
+					self::$opt[$item['class']] = array();
+					$lastclass = $item['class'];
+				}
 
-			self::$opt[$lastclass][$item['name']] = $item['value'];
+				self::$opt[$lastclass][$item['name']] = $item['value'];
+			}
 		}
 	}
 	
