@@ -1,0 +1,1 @@
+<?php header('Content-Type: application/json'); ?>{"status":true,"result":<?php echo json_encode( $list ); ?>}

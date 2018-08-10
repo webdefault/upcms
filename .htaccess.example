@@ -1,0 +1,17 @@
+RewriteEngine On
+
+RewriteBase /minha-url/
+
+RewriteCond $1 !(static|service|storage|adm0789)(.*)$
+RewriteRule ^(.*)$ index.php?$1 [L]
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+<filesMatch "\.(ico|gif|jpg|png)$">
+	ExpiresActive On
+	ExpiresDefault "access plus 11 month"
+	Header append Cache-Control "public"
+</filesMatch>

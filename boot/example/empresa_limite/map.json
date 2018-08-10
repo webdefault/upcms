@@ -1,0 +1,37 @@
+{
+	"id":"id",
+	"table":"empresas",
+	"where":{ },
+	"orderby":[["name", "DESC"]],
+	"reltables":{ 
+		"info":{ "id":"id", "table":"empresas_info", "join":["cnpj=empresa_limite.numero_documento"] }
+	},
+
+	"fields":
+	{
+		"razao_social":{ "title":"Razão social", "type":"simpletext", "column":"nome", "static":true },
+		"numero_documento":{ "title":"CNPJ", "type":"simpletext", "column":"cnpj", "mask":"99.999.999/9999-99", "static":true },
+
+		"saldo":{ 
+			"title":"Saldo", "type":"number", "static":true, "subtype":"money", "pre":"R$", "thousands":".", "decimal":",", 
+			"state-classes":{
+				"positive":"money-positive",
+				"negative":"money-negative"
+				}
+			},
+		"limite_usado":{ 
+			"title":"Limite utilizado", "type":"number", "static":true, "subtype":"money", "pre":"R$", "thousands":".", "decimal":",",
+			"state-classes":{
+				"positive":"money-positive",
+				"negative":"money-negative"
+				} 
+			},
+		"limite_total":{ 
+			"title":"Limite total", "type":"number", "subtype":"money", "pre":"R$", "thousands":".", "decimal":",",
+			"state-classes":{
+				"positive":"money-positive",
+				"negative":"money-negative"
+				}
+			}
+	}
+}

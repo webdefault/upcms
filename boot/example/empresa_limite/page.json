@@ -1,0 +1,18 @@
+{
+	"type":"default-edition",
+	"title":"Empresas",
+	"icon":"files-o",
+
+	"edit":
+	{
+		"title":"Limite do usuário",
+		"redirect-after-submit":"close-refresh",
+		"modal-params":{ "fullscreen":false },
+		"message":{
+			"save":"Limite alterado com sucesso",
+			"validation":"first-invalid-field"
+			},
+		
+		"mode":"tabs"
+	}
+}

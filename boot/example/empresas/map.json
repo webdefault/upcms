@@ -1,0 +1,160 @@
+{
+	"id":"id",
+	"table":"empresas",
+	"where":{ "grupo":2 },
+	"defaults":{},
+	"orderby":[["name", "DESC"]],
+	"reltables":{
+		"info":{ "id":"id", "table":"empresas_info", "join":["cnpj=empresas.numero_documento"] }
+		},
+
+	"fields":
+	{
+		"nome_fantasia":{ "title":"Nome fantasia", "type":"simpletext", "column":"nome_fantasia", "from":"info",
+			"required":true,
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o nome fantasia", "icon":"remove", "class":"has-error" }
+					}
+				}
+			},
+
+		"razao_social":{ "title":"Razão social", "type":"simpletext", "column":"nome",
+			"required":true,
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher a razão social", "icon":"remove", "class":"has-error" }
+					}
+				} 
+			},
+
+		"saldo":{ 
+			"title":"Saldo", "type":"number", "static":true, "subtype":"money", "pre":"R$", "thousands":".", "decimal":",", 
+			"state-classes":{
+				"positive":"money-positive",
+				"negative":"money-negative"
+				}
+			},
+
+		"acesso":{ "title":"Situación", "type":"select",
+			"options":
+			[
+				{ "title":"Bloqueado", "value":0, "class":"label-warning" },
+				{ "title":"Ativo", "value":1, "class":"label-success" }
+			]},
+
+		"numero_documento":{ "title":"CNPJ", "type":"simpletext", "column":"cnpj", "required":true, 
+			"mask":"99.999.999/9999-99",
+			"validation":{
+				"rules":{
+					"cnpj":{ "message":"CNPJ inválido.", "icon":"remove", "class":"has-error" } 
+					}
+				}
+			},
+
+		"cep":{ "title":"CEP", "type":"simpletext", "column":"cep", "from":"info", "required":true, 
+			"mask":"99999-999",
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o cep", "icon":"remove", "class":"has-error" } 
+					}
+				}
+			},
+
+		"logradouro":{ "title":"Logradouro", "type":"simpletext", "required":true, "from":"info",
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o logradouro", "icon":"remove", "class":"has-error" }
+					}
+				}
+			},
+
+		"numero":{ "title":"Número", "type":"simpletext", "column":"numero", "from":"info", "required":true, 
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o número", "icon":"remove", "class":"has-error" } 
+					}
+				}
+			},
+
+		"complemento":{ "title":"Complemento", "type":"simpletext", "from":"info" },
+
+		"bairro":{ "title":"Bairro", "type":"simpletext", "from":"info", "required":true, 
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o bairro", "icon":"remove", "class":"has-error" }
+					}
+				}
+			},
+
+		"cidade":{ "title":"Cidade", "type":"simpletext", "required":true, "from":"info",
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher a cidade", "icon":"remove", "class":"has-error" }
+					}
+				}
+			},
+
+		"estado":{ "title":"Estado", "type":"select", "from":"info",
+			"options":
+			[
+				{ "title":"Acre", "value":"AC" },
+				{ "title":"Alagoas", "value":"AL" },
+				{ "title":"Amazonas", "value":"AM" },
+				{ "value":"ap", "title":"Amapá" },
+				{ "value":"ba", "title":"Bahia" },
+				{ "value":"ce", "title":"Ceará" },
+				{ "value":"df", "title":"Distrito Federal" },
+				{ "value":"es", "title":"Espírito Santo" },
+				{ "value":"go", "title":"Goiás" },
+				{ "value":"ma", "title":"Maranhão" },
+				{ "value":"mt", "title":"Mato Grosso" },
+				{ "value":"ms", "title":"Mato Grosso do Sul"}, 
+				{ "value":"mg", "title":"Minas Gerais"}, 
+				{ "value":"pa", "title":"Pará"}, 
+				{ "value":"pb", "title":"Paraíba"}, 
+				{ "value":"pr", "title":"Paraná"}, 
+				{ "value":"pe", "title":"Pernambuco"}, 
+				{ "value":"pi", "title":"Piauí"}, 
+				{ "value":"rj", "title":"Rio de Janeiro"}, 
+				{ "value":"rn", "title":"Rio Grande do Norte"}, 
+				{ "value":"ro", "title":"Rondônia"}, 
+				{ "value":"rs", "title":"Rio Grande do Sul"}, 
+				{ "value":"rr", "title":"Roraima"}, 
+				{ "value":"sc", "title":"Santa Catarina"}, 
+				{ "value":"se", "title":"Sergipe"}, 
+				{ "value":"sp", "title":"São Paulo"}, 
+				{ "value":"to", "title":"Tocantins"}
+			],
+			"required":true,
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário selecionar o estado", "icon":"remove", "class":"has-error" }
+					}
+				}
+		},
+
+		"email":{ "title":"E-mail", "type":"simpletext", "required":true, "from":"info",
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o e-mail", "icon":"remove", "class":"has-error" }
+					}
+				}
+			},
+
+		"telefone":{ "title":"Telefone", "type":"simpletext", "column":"telefone", "from":"info", "required":true, 
+			"mask":"(99) 99999-9999",
+			"validation":{
+				"rules":{
+					"not-empty":{ "message":"É necessário preencher o telefone", "icon":"remove", "class":"has-error" } 
+					}
+				}
+			},
+
+		"actions":
+		{ 
+			"title":"Ações", "type":"ecm-actions",
+			"buttons":[{ "icon":"money", "title":"Limite", "url":"modal://edit-content/empresa-limite/{id}" }] 
+		}
+	}
+	}

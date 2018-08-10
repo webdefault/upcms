@@ -1,0 +1,30 @@
+{
+	"menus":
+	{
+		"main":
+		{
+			"sidebar":
+			{
+				
+			},
+
+			"user-menu":
+			{
+				"meus-dados":
+				{
+					"icon":"fa-user",
+					"link":"page://edit-content/meus_dados",
+					"title":"Meus dados"
+				},
+
+				"alterar_senha":
+				{
+					"icon":"fa-key",
+					"link":"modal://edit-content/alterar_senha",
+					"title":"Alterar senha"
+				}
+			}
+		}
+	}
+	
+}
