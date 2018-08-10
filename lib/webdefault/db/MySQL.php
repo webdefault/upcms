@@ -73,7 +73,7 @@ class MySQL implements IDatabase
 				if( !is_writable( $this->logFile ) )
 				{
 					$this->logFile = NULL;
-					error_log( "Error: MYSQL_LOG_FILE is not writable." );
+					error_log( "Error: ".$this->logFile." is not writable." );
 				}
 			}
 		}
