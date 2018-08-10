@@ -70,7 +70,6 @@ class MySQL implements IDatabase
 			
 			if( $this->logFile )
 			{
-				echo "logfie: ".$this->logFile;
 				touch( $this->logFile );
 				if( !is_writable( $this->logFile ) )
 				{
