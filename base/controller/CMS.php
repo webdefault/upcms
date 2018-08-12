@@ -42,7 +42,7 @@ class CMS extends BaseController
 		if( !isset($_SESSION['front']) ) $_SESSION['front'] = array();
 		
 		Options::setup( $context->db, Config::SYSTEM_TABLE_PREFIX.'options' );
-
+		
 		$this->user = SessionLogin::getLoggedUser();
 		// $this->front = Options::get( 'cms', 'front' );
 
