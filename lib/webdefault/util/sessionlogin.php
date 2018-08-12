@@ -27,7 +27,8 @@ class SessionLogin
 	
 	public static function getLoggedUser()
 	{
-		error_log( self::$sessionVar );
+		// error_log( self::$sessionVar );
+		
 		if( isset( $_SESSION[self::$sessionVar] ) )
 		{
 			return self::loadUser( $_SESSION[self::$sessionVar] );
