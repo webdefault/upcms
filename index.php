@@ -23,7 +23,7 @@ set_include_path( substr( __FILE__, 0, strlen( __FILE__ ) - strlen( 'index.php' 
 define( 'INCLUDE_PATH', get_include_path() );
 
 // Configurações Gerais
-require_once( 'boot/config.php' );
+require_once( '../boot/config.php' );
 
 // Define o timezone local
 date_default_timezone_set( defined( 'Config::TIMEZONE' ) ? Config::TIMEZONE : 'America/Halifax' );
@@ -168,7 +168,7 @@ function boot( $request_uri )
 	define( 'BASE', basename( VIEW ) );
 
 	// Carrega a aplicacao
-	require_once( 'boot/'.Config::APPLICATION_STARTER.'.php' );
+	require_once( '../boot/'.Config::APPLICATION_STARTER.'.php' );
 
 	$mainApp = new MainApplication( $array_uri );
 }
