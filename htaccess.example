@@ -1,0 +1,27 @@
+# enable cross domain access control
+# Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+
+# force apache to return 200 without executing my scripts
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule .* / [R=200,L]
+
+RewriteBase /kldit-example/
+
+RewriteCond $1 !^(static|service|storage)(.*)$
+RewriteRule ^(.*)$ upcms/index.php?$1 [L]
+
+RewriteCond $1 (static)(.*)\.js$
+RewriteRule ^(.*)$ service/uglifyjs/index.php?file=$1 [L]
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+<filesMatch "\.(ico|gif|jpg|png)$">
+	ExpiresActive On
+	ExpiresDefault "access plus 11 month"
+	Header append Cache-Control "public"
+</filesMatch>
