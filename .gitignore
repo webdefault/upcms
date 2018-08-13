@@ -4,10 +4,6 @@
 !.elasticbeanstalk/*.global.yml
 .htaccess
 admin/*
-boot/config.php
-boot/starter.php
-boot/certificates/*
-boot/i18n/*
 log
 .DS_Store
 storage
