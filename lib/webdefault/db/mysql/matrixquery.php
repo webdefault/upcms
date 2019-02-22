@@ -533,17 +533,34 @@ class MatrixQuery
 				{
 					$linkage = true;
 					$path = explode( '.', $column[1] );
-					$ncol = @$data[$path[0]] ? @$data[$path[0]][$path[1]] : NULL;
 					
-					//echo "ncol: "; print_r( $path ); echo "\n";
-					//echo "res: ".$ncol."\n";
-
-					if( $ncol != NULL )
+					$table = $data[$path[0]];
+					$ncol = null;
+					
+					if( @$table && @$table[$path[1]] )
 					{
-						return MatrixQuery::findColumnValue( $ncol, $data );
+						$ncol = $table[$path[1]];
 					}
+					else if( $table )
+					{
+						foreach( $table AS $i => $col )
+						{
+							if( $col[0] == $path[1] )
+							{
+								$ncol = $col;
+							}
+						}
+					}
+					// console.log( "ncol: ", path, ncol );
+					//echo "res: ".ncol."\n";
 
-					return NULL;
+					if($ncol != null)
+					{
+						// console.log( "find: " + ncol + this.findColumnValue(ncol, data) );
+						return MatrixQuery::findColumnValue($ncol, $data);
+					}
+					else
+						return null;
 				}
 				break;
 				
@@ -736,13 +753,15 @@ class MatrixQuery
 			
 			//echo "Can create? : ".$cancreate."\n";
 			// print_r( array( 'table' => $targetName, 'cols' => $columns, 'where' => $where ) );//exit;
+
 			if( $cancreate && count( $columns ) > 0 )
 			{
 				if( Config::ENV == 'development' )
 				{
 					self::$debug[] = array( 'table' => $targetName, 'cols' => $columns, 'where' => $where );
 				}
-				// print_r( array( 'table' => $targetName, 'cols' => $columns, 'where' => $where ) );//exit;
+				//echo "result:\n";
+				//print_r( array( 'table' => $targetName, 'cols' => $columns, 'where' => $where ) );//exit;
 				if( !@$matrixQuery['tables'][ $targetName ]['insert'] && count( $where ) > 0 )
 				{
 					/*
@@ -779,6 +798,7 @@ class MatrixQuery
 					}
 					
 					$result = $db->select( $sql, $binds );
+					// print_r( $result );
 					if( count( $result ) > 0 )
 					{
 						$db->update( $matrixQuery['tables'][ $targetName ]['table'], $columns, $where );

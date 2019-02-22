@@ -184,34 +184,40 @@ class OptionsField extends SimpletextField
 		if( @$dyn->{'subtype'} == "multiple-columns" )
 		{
 			// print_r( MatrixQuery::select( $mql ) );
-			foreach( $result AS $key => $item )
+			if( $result )
 			{
-				$opt = new stdClass();
-				$opt->title = parse_bracket_instructions( $dyn->title, $item );
-				$opt->value = parse_bracket_instructions( $dyn->value, $item );
-				
-				if( @$dyn->class ) 
-					$opt->class = parse_bracket_instructions( $dyn->class, $item );
-				
-				if( @$dyn->{'list-class'} ) 
-					$opt->{'list-class'} = parse_bracket_instructions( $dyn->{'list-class'}, $item );
-				$options[] = $opt;
+				foreach( $result AS $key => $item )
+				{
+					$opt = new stdClass();
+					$opt->title = parse_bracket_instructions( $dyn->title, $item );
+					$opt->value = parse_bracket_instructions( $dyn->value, $item );
+					
+					if( @$dyn->class ) 
+						$opt->class = parse_bracket_instructions( $dyn->class, $item );
+					
+					if( @$dyn->{'list-class'} ) 
+						$opt->{'list-class'} = parse_bracket_instructions( $dyn->{'list-class'}, $item );
+					$options[] = $opt;
+				}
 			}
 		}
 		else
 		{
-			foreach( $result AS $key => $item )
+			if( $result )
 			{
-				$opt = new stdClass();
-				$opt->title = $item[$dyn->title];
-				$opt->value = $item[$dyn->value];
-				
-				if( @$dyn->class ) 
-					$opt->class = $item[$dyn->class];
-				
-				if( @$dyn->{'list-class'} ) 
-					$opt->{'list-class'} = $item[$dyn->{'list-class'}];
-				$options[] = $opt;
+				foreach( $result AS $key => $item )
+				{
+					$opt = new stdClass();
+					$opt->title = $item[$dyn->title];
+					$opt->value = $item[$dyn->value];
+					
+					if( @$dyn->class ) 
+						$opt->class = $item[$dyn->class];
+					
+					if( @$dyn->{'list-class'} ) 
+						$opt->{'list-class'} = $item[$dyn->{'list-class'}];
+					$options[] = $opt;
+				}
 			}
 		}
 	}

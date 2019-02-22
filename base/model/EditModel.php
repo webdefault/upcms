@@ -76,6 +76,7 @@ class EditModel extends BaseModel
 			}
 		}
 
+		// print_r( $mql ); exit;
 		$ids = MatrixQuery::update( $mql, $this->db );
 		
 		// after save

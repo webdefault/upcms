@@ -6,7 +6,7 @@
  *
  */
 
-load_lib_file( 'webdefault/db/mysql/matrixquery' );
+load_lib_file( 'webdefault/db/mysql/matrixquery');
 
 abstract class Operation
 {
@@ -145,10 +145,13 @@ class JoinField extends CustomField
 		
 		$this->join = $path = explode( '.', $this->value );
 		
-		$this->value = ( !@$this->mapId[$mapName] && @$this->mapId[$path[0]] && $path[1] == 'id' ) 
+		$this->value = ( $this->mapId &&
+			!$this->mapId[$mapName] && 
+			 $this->mapId[$path[0]] && 
+			 $path[1] == 'id' ) 
 			? $this->mapId[$path[0]] 
 			: $this->value;
-			
+
 		$request->setColumn( $this->table, $this->column, $this->name, $this->value, $this, $this->joinType );
 	}
 	
@@ -187,9 +190,8 @@ class JoinField extends CustomField
 	public function update( $values )
 	{
 		$t = $this->table( $this->table );
-		
-		if( $t->id == $this->column )
-			$this->request->setColumn( $this->table, $this->column, $this->name, $this->value, $this, 0 );
+		//if( $t->id == $this->column )
+		//	$this->request->setColumn( $this->table, $this->column, $this->name, $this->value, $this, 0 );
 	}
 }
 
